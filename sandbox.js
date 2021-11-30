@@ -22,4 +22,4 @@ client.on("messageCreate", message =>{
     };
 });
 
-client.login("OTE1MTYyMDEyNTQ2MzcxNTk1.YaXlCg.MvfeSSVmLdd0cKkR8Bx9As2v3zo")
+client.login("");
