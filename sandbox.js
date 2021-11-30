@@ -31,5 +31,4 @@ client.on("messageCreate", message =>{
         case"getTeamsMessages":
     };
 });
-
 client.login("");
