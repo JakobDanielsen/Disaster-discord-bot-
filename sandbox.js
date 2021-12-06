@@ -28,7 +28,16 @@ client.on("messageCreate", message =>{
                     .setTimestamp()
                 message.channel.send({ embeds: [embed]});
         break;
+        case"help":
+            message.channel.send("+help");
+        break;
+
         case"getTeamsMessages":
     };
 });
 client.login("");
+
+
+function soliderGame(){
+    
+}
