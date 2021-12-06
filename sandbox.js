@@ -17,14 +17,24 @@ client.on("messageCreate", message =>{
     const args = message.content.slice(prefix.length).split(" ");
     switch (args[0]){
         case"help":
-            message.channel.send("+help");
+            let embed = new MessageEmbed()
+                    .setTitle(`The help has arrived!`)
+                    .addFields(
+                        { name: 'LOREM IPSUM', value: `DOLOR`},
+                        { name: 'LOREM IPSUM', value: `DOLOR`},
+                    )
+                    .setColor("#0099ff")
+                    .setAuthor("Helene,Jakob,Szymon")
+                    .setTimestamp()
+                message.channel.send({ embeds: [embed]});
         break;
         case"help":
             message.channel.send("+help");
         break;
+
+        case"getTeamsMessages":
     };
 });
-
 client.login("");
 
 

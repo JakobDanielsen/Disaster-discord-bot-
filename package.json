@@ -1,0 +1,19 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "\"discord bot for school\"",
+  "main": "sandbox.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JakobDanielsen/discordbot.git"
+  },
+  "author": "Helene Amlo, Jakob Danielsen, Szymon Popiolek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JakobDanielsen/discordbot/issues"
+  },
+  "homepage": "https://github.com/JakobDanielsen/discordbot#readme"
+}
