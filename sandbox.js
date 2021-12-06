@@ -19,7 +19,15 @@ client.on("messageCreate", message =>{
         case"help":
             message.channel.send("+help");
         break;
+        case"help":
+            message.channel.send("+help");
+        break;
     };
 });
 
 client.login("");
+
+
+function soliderGame(){
+    
+}
