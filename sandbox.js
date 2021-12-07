@@ -80,7 +80,7 @@ client.on("messageCreate", message =>{
 
         // GAME SECTION //
 
-        case"getbitcoin" || "Getbitcoin":
+        case"getbitcoin" || "Getbitcoin" || "get":
         getBitcoin();
         break;
         case "bet":
