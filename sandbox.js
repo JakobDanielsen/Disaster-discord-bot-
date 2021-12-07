@@ -87,7 +87,7 @@ client.on("messageCreate", message =>{
         case "bet":
               bet();
         break;
-        case"bal":
+        case"bal" ||"Balance" ||"balance":
         message.channel.send(`You have ${bankBalances[message.author.id]} BTC`);
         break;
         default:
