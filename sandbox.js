@@ -76,18 +76,18 @@ client.on("messageCreate", message =>{
                     .setTimestamp()
                 message.channel.send({ embeds: [embed]});
         break;
-        case"getTeamsMessages":
+        case "getTeamsMessages":
         break;
 
         // GAME SECTION //
 
-        case"getbitcoin" || "Getbitcoin" || "get":
+        case "getbitcoin" || "Getbitcoin" || "get":
         getBitcoin();
         break;
         case "bet":
               bet();
         break;
-        case"bal" ||"Balance" ||"balance":
+        case "bal" || "Balance" || "balance":
         message.channel.send(`You have ${bankBalances[message.author.id]} BTC`);
         break;
         default:
