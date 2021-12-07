@@ -1,4 +1,4 @@
-const { Client, Intents, Message, MessageEmbed, User, MessageAttachment } = require('discord.js');
+const { Client, Intents, Message, MessageEmbed, User, MessageAttachment, Guild } = require('discord.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
@@ -10,12 +10,29 @@ const prefix ="+";
 let bankBalances = {};
 // GAME VARIABLES
 
-client.once('ready', () =>{
-    console.log("Conceive bot er online!")
+client.once('ready', (message) =>{
+    client.user.setPresence({ activities: [{ name: 'help', type: 'PLAYING' }], status: 'online' });
+
+
+    //Når botten skrus på, finn en kanal kalt disaster, deretter send en melding der hvor boten pinger alle.
+    if(client.channels.cache.find(channel => channel.name === 'disaster')){
+
+    const channel = client.channels.cache.find(channel => channel.name === 'disaster')
+
+    const id = channel ? channel.id : null;
+
+    client.channels.cache.get(`${id}`).send("@everyone disaster is online!");
+
+    } else{
+        const channel = client.channels.cache.find(channel => channel.name === 'general')
+
+        const id = channel ? channel.id : null;
+
+        client.channels.cache.get(`${id}`).send("You need to create a channel for disaster bot-on messages called [disaster]");
+    }
 });
 
 client.on("messageCreate", message =>{
-    
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(" ");
@@ -32,12 +49,10 @@ client.on("messageCreate", message =>{
                     .setTimestamp()
                 message.channel.send({ embeds: [embed]});
         break;
-        case"help":
-            message.channel.send("+help");
-        break;
 
         case"getTeamsMessages":
         break;
+
 
 
         // GAME SECTION //
@@ -47,10 +62,15 @@ client.on("messageCreate", message =>{
         break;
         case"Balance":
         message.channel.send(`You have ${bankBalances[message.author.id]} BTC`)
+
+        default:
+            message.channel.send("this is not a valid command, to see all commands type +help");
+
         break;
     };
 });
 client.login("");
+
 
 function bitcoinBet() {
     
@@ -63,3 +83,4 @@ function bitcoinBet() {
     
     message.channel.send()
 }
+
