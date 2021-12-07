@@ -7,7 +7,7 @@ const prefix ="+";
 
 
 client.once('ready', (message) =>{
-    client.user.setPresence({ activities: [{ name: 'help', type: 'PLAYING' }], status: 'online' });
+    client.user.setPresence({ activities: [{ name: '+help', type: 'PLAYING' }], status: 'online' });
 
 
     //Når botten skrus på, finn en kanal kalt disaster, deretter send en melding der hvor boten pinger alle.
@@ -35,9 +35,9 @@ client.on("messageCreate", message =>{
     switch (args[0]){
         case"help":
             let embed = new MessageEmbed()
-                    .setTitle(`The help has arrived!`)
+                    .setTitle(`Disaster bot`)
                     .addFields(
-                        { name: 'LOREM IPSUM', value: `DOLOR`},
+                        { name: 'game', value: `a small game! :partying_face:`},
                         { name: 'LOREM IPSUM', value: `DOLOR`},
                     )
                     .setColor("#0099ff")
@@ -45,7 +45,6 @@ client.on("messageCreate", message =>{
                     .setTimestamp()
                 message.channel.send({ embeds: [embed]});
         break;
-
         case"getTeamsMessages":
         break;
         default:
@@ -53,5 +52,5 @@ client.on("messageCreate", message =>{
         break;
     };
 });
-client.login("");
+client.login("OTE1MTYyMDEyNTQ2MzcxNTk1.YaXlCg.vwU-Xpf9lvCLUxyE9QI0tgxNGzE");
 
