@@ -64,7 +64,8 @@ client.on("messageCreate", message =>{
 
     const args = message.content.slice(prefix.length).split(" ");
     switch (args[0]){
-        case"help" || "Help":
+        case"help":
+        case"Help":
             let embed = new MessageEmbed()
                     .setTitle(`Disaster bot`)
                     .addFields(
@@ -81,13 +82,17 @@ client.on("messageCreate", message =>{
 
         // GAME SECTION //
 
-        case "getbitcoin" || "Getbitcoin" || "get":
+        case "getbitcoin":
+        case "Getbitcoin":
+        case "get":
         getBitcoin();
         break;
         case "bet":
               bet();
         break;
-        case "bal" || "Balance" || "balance":
+        case "bal": 
+        case"Balance": 
+        case "balance":
         message.channel.send(`You have ${bankBalances[message.author.id]} BTC`);
         break;
         default:
