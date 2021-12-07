@@ -45,15 +45,15 @@ client.on("messageCreate", message =>{
         }
     }
     
-    function bet(args1,args2) {
-        if (args2 > 4 || args1 > bankBalances[message.author.id]) {
+    function bet() {
+        if (args[2] > 4 || args[1] > bankBalances[message.author.id]) {
             message.channel.send("You must have the amount of money you bet and bet on a random number from 1 to 4")
-        } else if (args2 == Math.round(Math.random()*3+1)) {
+        } else if (args[2] == Math.round(Math.random()*3+1)) {
             bankBalances[message.author.id] *= 2.5
             message.channel.send(`You Won! New balance is ${bankBalances[message.author.id]} BTC`)
         } else {
             message.channel.send("Better luck next time!")
-            bankBalances[message.author.id] -= args1
+            bankBalances[message.author.id] -= args[1]
         }
     }
 
@@ -87,8 +87,8 @@ client.on("messageCreate", message =>{
         case "bet":
               bet();
         break;
-        case"Balance" || "balance" || "bal":
-        message.channel.send(`You have ${bankBalances[message.author.id]} BTC`)
+        case "Balance" || "balance" || "bal":
+        message.channel.send(`You have ${bankBalances[message.author.id]} BTC`);
         break;
         default:
             message.channel.send("this is not a valid command, to see all commands type +help");
