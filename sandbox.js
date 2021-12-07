@@ -2,7 +2,7 @@ const { Client, Intents, Message, MessageEmbed, User, MessageAttachment, Guild }
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-let mention = message.mentions.user.first();
+
 
 const prefix ="+";
 
@@ -33,6 +33,8 @@ client.once('ready', (message) =>{
 });
 
 client.on("messageCreate", message =>{
+    //let mention = message.mentions.user.first();
+
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(" ");
@@ -51,17 +53,22 @@ client.on("messageCreate", message =>{
         break;
         case"getTeamsMessages":
         break;
-
-
-
         // GAME SECTION //
-
+        function bitcoinBet() {
+    
+            if (bankBalances[message.author.id] == null) {
+                bankBalances[message.author.id] = 10;
+                message.channel.send("You were given 10 BTC")
+            } else { 
+                message.channel.send("You have already recieved your startup money")
+            }
+        }
         case"BitcoinBet":
         bitcoinBet();
         break;
         case"Balance":
         message.channel.send(`You have ${bankBalances[message.author.id]} BTC`)
-
+        break;
         default:
             message.channel.send("this is not a valid command, to see all commands type +help");
 
@@ -71,15 +78,5 @@ client.on("messageCreate", message =>{
 client.login("OTE1MTYyMDEyNTQ2MzcxNTk1.YaXlCg.vwU-Xpf9lvCLUxyE9QI0tgxNGzE");
 
 
-function bitcoinBet() {
-    
-    if (bankBalances[message.author.id] == null) {
-        bankBalances[message.author.id] = 10;
-        message.channel.send("You were given 10 BTC")
-    } else { 
-        message.channel.send("You have already recieved your startup money")
-    }
-    
-    message.channel.send()
-}
+
 
