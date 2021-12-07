@@ -48,8 +48,13 @@ client.on("messageCreate", message =>{
     function bet() {
         if (args[2] > 4 || args[1] > bankBalances[message.author.id]) {
             message.channel.send("You must have the amount of money you bet and bet on a random number from 1 to 4")
+<<<<<<< HEAD
         } else if (args[2] == Math.round(Math.random()*3+1)) {
             bankBalances[message.author.id] *= 2.5
+=======
+        } else if (args2 == Math.round(Math.random()*3+1)) {
+            args1 =+ args1*1.5
+>>>>>>> main
             message.channel.send(`You Won! New balance is ${bankBalances[message.author.id]} BTC`)
         } else {
             message.channel.send("Better luck next time!")
