@@ -54,6 +54,7 @@ client.on("messageCreate", message =>{
             message.channel.send(`You Won! New balance is ${bankBalances[message.author.id]} BTC`)
         } else {
             message.channel.send("Better luck next time!")
+            bankBalances[message.author.id] -= args1
         }
     }
     //let mention = message.mentions.user.first();
