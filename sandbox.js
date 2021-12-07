@@ -55,7 +55,6 @@ client.on("messageCreate", message =>{
         break;
 
         // GAME SECTION //
- Jakob
 
         case"getbitcoin" || "Getbitcoin":
         getBitcoin();
