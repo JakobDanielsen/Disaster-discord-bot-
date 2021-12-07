@@ -1,8 +1,8 @@
 const { Client, Intents, Message, MessageEmbed, User, MessageAttachment, Guild } = require('discord.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-
-
+//importer json fil for å skjule token så det ikke blir resatt hver gang vi pusher botten til main
+let config = require('./config.json');
 
 const prefix ="+";
 
@@ -53,6 +53,7 @@ client.on("messageCreate", message =>{
         break;
         case"getTeamsMessages":
         break;
+
         // GAME SECTION //
         function bitcoinBet() {
     
@@ -75,7 +76,7 @@ client.on("messageCreate", message =>{
         break;
     };
 });
-client.login("OTE1MTYyMDEyNTQ2MzcxNTk1.YaXlCg.vwU-Xpf9lvCLUxyE9QI0tgxNGzE");
+client.login(config.token);
 
 
 
