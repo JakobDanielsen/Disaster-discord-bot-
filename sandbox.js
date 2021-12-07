@@ -45,7 +45,6 @@ client.on("messageCreate", message =>{
         }
     }
     
-    
     function bet(args1,args2) {
         if (args2 > 4 || args1 > bankBalances[message.author.id]) {
             message.channel.send("You must have the amount of money you bet and bet on a random number from 1 to 4")
@@ -56,6 +55,8 @@ client.on("messageCreate", message =>{
             message.channel.send("Better luck next time!")
         }
     }
+
+    
     //let mention = message.mentions.user.first();
 
     if(!message.content.startsWith(prefix) || message.author.bot) return;
