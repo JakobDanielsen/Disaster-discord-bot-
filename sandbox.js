@@ -18,6 +18,7 @@ client.once('ready', (message) =>{
     const id = channel ? channel.id : null;
 
     client.channels.cache.get(`${id}`).send("@everyone disaster is online!");
+
     } else{
         const channel = client.channels.cache.find(channel => channel.name === 'general')
 
@@ -44,9 +45,6 @@ client.on("messageCreate", message =>{
                     .setTimestamp()
                 message.channel.send({ embeds: [embed]});
         break;
-        case"help":
-            message.channel.send("+help");
-        break;
 
         case"getTeamsMessages":
         break;
@@ -57,7 +55,3 @@ client.on("messageCreate", message =>{
 });
 client.login("");
 
-
-function soliderGame(){
-    
-}
