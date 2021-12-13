@@ -68,8 +68,9 @@ client.on("messageCreate", message =>{
             let embed = new MessageEmbed()
                     .setTitle(`Disaster bot`)
                     .addFields(
-                        { name: 'game', value: `a small game! :partying_face:`},
-                        { name: 'LOREM IPSUM', value: `DOLOR`},
+                        { name: 'getbitcoin', value: `get the bitcoin for your game :partying_face:`},
+                        { name: 'bet', value: `Bet some bitcoin!`},
+                        { name: 'bal', value: `shows you your bitcoin balance :moneybag:`},
                     )
                     .setColor("#0099ff")
                     .setAuthor("Helene,Jakob,Szymon")
@@ -95,11 +96,29 @@ client.on("messageCreate", message =>{
         case "balance":
         message.channel.send(`You have ${bankBalances[message.author.id]} BTC`);
         break;
+        case "subreddit":
+            if(!args[1]){
+                message.channel.send("Syntax: +subreddit [subreddit]");
+            }else{
+                async function fetch(){
+                const fetch = require("node-fetch");
+                let data = await fetch(`http://meme-api.herokuapp.com/gimme/${args[1]}`).then(res =>
+                res.json()) .catch(console.error())
+                let embed1 = new MessageEmbed()
+                    .setTitle(`here is a post from ${args[1]}`)
+                    .setURL(data.postLink)
+                    .setColor("#0099ff")
+                    .setFooter(data.ups + " Upvotes")
+                    .setTimestamp()
+                    .setImage(data.url)
+                message.channel.send({ embeds: [embed1]});
+                };
+                fetch();
+            };
+        break;
         default:
             message.channel.send("this is not a valid command, to see all commands type +help");
-        break;
-
-        
+        break; 
     };
 });
 client.login(config.token);
