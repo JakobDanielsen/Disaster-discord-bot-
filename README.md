@@ -1,6 +1,6 @@
 # Disaster bot
 A school project by: Jakob danielsen, Helene Amlo, and Syz
-<a href="https://discord.gg/gscXkPQ3Nn"><img align="right" src="https://jakobdanielsen.github.io/discordbot/kh.png" width=27% height=50%></a>
+<a href="https://discord.gg/gscXkPQ3Nn"><img align="right" src="https://jakobdanielsen.github.io/discordbot/kh.png" width=20%></a>
 
 Disaster bot is a fast, powerful, unopinionated, bot made with Javascipt using the official [Discord.js package](https://discord.com/developers/docs/intro).
 
