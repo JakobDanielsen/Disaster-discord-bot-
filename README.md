@@ -4,6 +4,11 @@
 
 Disaster bot is a fast, powerful, unopinionated, reactive library to enable quick and easy development of Discord bots for Javascipt using the official [Discord Bot API](https://discord.com/developers/docs/intro).
 
+
+
+
+
+
 ## 🎉 developers
 
 Our developers are a important part of making the bot, perhaps the most important part, therefore we think that they deserve praise.
