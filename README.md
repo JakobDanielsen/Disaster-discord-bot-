@@ -1,5 +1,5 @@
 # Disaster bot
-
+A school project by: Jakob danielsen, Helene Amlo, and Syz
 <a href="https://discord.gg/gscXkPQ3Nn"><img align="right" src="https://scontent.fosl1-1.fna.fbcdn.net/v/t1.6435-9/130193750_2875189169472640_7998077384269554459_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=9zBj049avFwAX9148Xs&_nc_ht=scontent.fosl1-1.fna&oh=68858cebfab6a4c8370c8ea75621aedb&oe=61DC39F5" width=27%></a>
 
 Disaster bot is a fast, powerful, unopinionated, bot made with Javascipt using the official [Discord.js package](https://discord.com/developers/docs/intro).
