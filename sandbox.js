@@ -12,8 +12,7 @@ let bankBalances = {};
 
 client.once('ready', (message) =>{
     client.user.setPresence({ activities: [{ name: '+help', type: 'PLAYING' }], status: 'online' });
-
-
+    
     //Når botten skrus på, finn en kanal kalt disaster, deretter send en melding der hvor boten pinger alle.
     if(client.channels.cache.find(channel => channel.name === 'disaster')){
 
@@ -92,7 +91,6 @@ client.on("messageCreate", message =>{
         break;
         default:
             message.channel.send("this is not a valid command, to see all commands type +help");
-
         break;
 
         
