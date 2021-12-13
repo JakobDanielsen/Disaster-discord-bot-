@@ -47,8 +47,8 @@ client.on("messageCreate", message =>{
     function bet() {
         if (args[2] > 4 || args[1] > bankBalances[message.author.id]) {
             message.channel.send("You must have the amount of money you bet and bet on a random number from 1 to 4")
-        } else if (args[2] == Math.round(Math.random()*3+1)) {
-            args[1] += args[1]*1.5
+        } else if (args[2] == Math.round(Math.random()*4+1)) {
+            bankBalances[message.author.id] += args[1]*4;
             message.channel.send(`You Won! New balance is ${bankBalances[message.author.id]} BTC`)
         } else {
             message.channel.send("Better luck next time!")
@@ -63,7 +63,8 @@ client.on("messageCreate", message =>{
 
     const args = message.content.slice(prefix.length).split(" ");
     switch (args[0]){
-        case"help" || "Help":
+        case"help":
+        case"Help":
             let embed = new MessageEmbed()
                     .setTitle(`Disaster bot`)
                     .addFields(
@@ -75,18 +76,23 @@ client.on("messageCreate", message =>{
                     .setTimestamp()
                 message.channel.send({ embeds: [embed]});
         break;
-        case"getTeamsMessages":
+        case "getTeamsMessages":
         break;
 
         // GAME SECTION //
 
-        case"getbitcoin" || "Getbitcoin" || "get":
+        case "getbitcoin":
+        case "Getbitcoin":
+        case "get":
         getBitcoin();
         break;
+
         case "bet":
               bet();
         break;
-        case"bal" ||"Balance" ||"balance":
+        case "bal": 
+        case"Balance": 
+        case "balance":
         message.channel.send(`You have ${bankBalances[message.author.id]} BTC`);
         break;
         default:
