@@ -96,25 +96,23 @@ client.on("messageCreate", message =>{
         case "balance":
         message.channel.send(`You have ${bankBalances[message.author.id]} BTC`);
         break;
-        case "subreddit":
-            if(!args[1]){
-                message.channel.send("Syntax: +subreddit [subreddit]");
-            }else{
+        case"value":
                 async function fetch(){
                 const fetch = require("node-fetch");
-                let data = await fetch(`http://meme-api.herokuapp.com/gimme/${args[1]}`).then(res =>
+                let data = await fetch(`http://api.coinlayer.com/api/live?access_key=223df91f83bcba306ce587bce6cc0fd8`).then(res =>
                 res.json()) .catch(console.error())
+                let btcvalue = Math.round(bankBalances[message.author.id] * data.rates.BTC);
                 let embed1 = new MessageEmbed()
-                    .setTitle(`here is a post from ${args[1]}`)
-                    .setURL(data.postLink)
+                    .setTitle(`Your bitcoin value:`)
+                    .addFields(
+                        {name:"your bitcoin: ", value: `${bankBalances[message.author.id]}`},
+                        {name: "value: ", value: `${btcvalue} $`}
+                    )
                     .setColor("#0099ff")
-                    .setFooter(data.ups + " Upvotes")
                     .setTimestamp()
-                    .setImage(data.url)
                 message.channel.send({ embeds: [embed1]});
                 };
                 fetch();
-            };
         break;
         default:
             message.channel.send("this is not a valid command, to see all commands type +help");
