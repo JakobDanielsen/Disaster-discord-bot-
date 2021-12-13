@@ -11,13 +11,13 @@ Disaster bot is a fast, powerful, unopinionated, bot made with Javascipt using t
 Our developers are a important part of making the bot, perhaps the most important part, therefore we think that they deserve praise.
 Therefore we give special thanks to:
 
-* [jakob danielsen](https://github.com/JakobDanielsen)
-* [szy](https://github.com/szymonpopio)
-* [helene amlo](https://github.com/henningamlo)
+* [Jakob Danielsen](https://github.com/JakobDanielsen)
+* [szY](https://github.com/szymonpopio)
+* [Helene Amlo](https://github.com/henningamlo)
 
 ## 💎 Benefits
 
-* 🚀 **fun** - Disaster bot can be used for all kinds of fun.
+* 🚀 **Fun** - Disaster bot can be used for all kinds of fun.
 
 * 📜 **Useful** - Disaster bot can be used for getting teams messages, which is really useful if you forget an assignment
 
