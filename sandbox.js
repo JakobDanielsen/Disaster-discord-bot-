@@ -36,7 +36,7 @@ client.once('ready', (message) =>{
 client.on("messageCreate", message =>{
     function getBitcoin() {
     
-        if (bankBalances[message.author.id] == null) {
+        if (bankBalances[message.author.id] == null ) {
             bankBalances[message.author.id] = 10;
             message.channel.send("You were given 10 BTC")
         } else { 
@@ -45,7 +45,7 @@ client.on("messageCreate", message =>{
     }
     
     function bet() {
-        if (args[2] > 4 || args[1] > bankBalances[message.author.id]) {
+        if (args[2] > 4 || args[1] > bankBalances[message.author.id] || args[1] == null) {
             message.channel.send("You must have the amount of money you bet and bet on a random number from 1 to 4")
         } else if (args[2] == Math.round(Math.random()*4+1)) {
             bankBalances[message.author.id] += args[1]*4;
