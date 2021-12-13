@@ -1,11 +1,8 @@
 # Disaster bot
 
-<a href="https://discord.gg/gscXkPQ3Nn"><img align="right" src="https://imaginary.abcmedia.no/resize?width=500&interlace=true&url=https%3A%2F%2Fabcnyheter.drpublish.aptoma.no%2Fout%2Fimages%2Farticle%2F%2F2021%2F08%2F22%2F195781570%2F1%2Foriginal%2F36153866.jpg" width=27%></a>
+<a href="https://discord.gg/gscXkPQ3Nn"><img align="right" src="" width=27%></a>
 
 Disaster bot is a fast, powerful, unopinionated, bot made with Javascipt using the official [Discord.js package](https://discord.com/developers/docs/intro).
-
-
-
 
 
 
