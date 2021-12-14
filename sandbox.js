@@ -66,14 +66,15 @@ client.on("messageCreate", message =>{
         }
     }
 
+    // lånt fra nettet :)
     function thousandsSeparators(num) {
         let num_parts = num.toString().split(".");
         num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return num_parts.join(".");
     }
     
-    //let mention = message.mentions.user.first();
 
+    //let mention = message.mentions.user.first();
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(" ");
