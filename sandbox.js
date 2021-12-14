@@ -55,17 +55,22 @@ client.on("messageCreate", message =>{
         }
     };
     function bet() {
-        if (args[2] > 4 || args[1] > bankBalances[message.author.id] || args[1] == null) {
-            message.channel.send("You must have the amount of money you bet and bet on a random number from 1 to 4")
-        } else if (args[2] == Math.round(Math.random()*4+1)) {
-            bankBalances[message.author.id] += args[1]*4;
+        if (args[1] > bankBalances[message.author.id] || args[1] == null) {
+            message.channel.send("You must have the amount of money you bet")
+        } else if (3 == Math.round(Math.random()*3)) {
+            bankBalances[message.author.id] += args[1]*3;
             message.channel.send(`You Won! New balance is ${bankBalances[message.author.id]} BTC`)
         } else {
-            message.channel.send("Better luck next time!")
             bankBalances[message.author.id] -= args[1];
+            message.channel.send(`Better luck next time! New balance is ${bankBalances[message.author.id]} BTC`)
         }
     }
 
+    function thousandsSeparators(num) {
+        let num_parts = num.toString().split(".");
+        num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return num_parts.join(".");
+    }
     
     //let mention = message.mentions.user.first();
 
@@ -113,10 +118,9 @@ client.on("messageCreate", message =>{
                 res.json()) .catch(console.error())
                 let btcvalue = Math.round(bankBalances[message.author.id] * data.rates.BTC);
                 let embed1 = new MessageEmbed()
-                    .setTitle(`Your bitcoin value:`)
                     .addFields(
-                        {name:"your bitcoin: ", value: `${bankBalances[message.author.id]}`},
-                        {name: "value: ", value: `${btcvalue} $`}
+                        {name:"Your bitcoin: ", value: `${thousandsSeparators(bankBalances[message.author.id])}`},
+                        {name: "USD equivalent: ", value: `${thousandsSeparators(btcvalue)} $`}
                     )
                     .setColor("#0099ff")
                     .setTimestamp()
