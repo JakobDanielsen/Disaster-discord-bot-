@@ -43,7 +43,17 @@ client.on("messageCreate", message =>{
             message.channel.send("You have already recieved your startup money")
         }
     }
-    
+    function flip(){
+        let flipnum = Math.round(Math.random());
+        switch(flipnum){
+            case 0:
+                message.channel.send("you flipped heads");
+            break;
+            case 1: 
+            message.channel.send("you flipped tails");
+            break;
+        }
+    };
     function bet() {
         if (args[2] > 4 || args[1] > bankBalances[message.author.id] || args[1] == null) {
             message.channel.send("You must have the amount of money you bet and bet on a random number from 1 to 4")
@@ -113,6 +123,9 @@ client.on("messageCreate", message =>{
                 message.channel.send({ embeds: [embed1]});
                 };
                 fetch();
+        break;
+        case "flip":
+            flip();
         break;
         default:
             message.channel.send("this is not a valid command, to see all commands type +help");
