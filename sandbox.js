@@ -4,7 +4,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 //importer json fil for å skjule token så det ikke blir resatt hver gang vi pusher botten til main
 let config = require('./config.json');
 
-let userselectedcrypto = {};
+const userselectedcrypto = {};
 
 const prefix ="+";
 
@@ -36,13 +36,13 @@ client.once('ready', (message) =>{
 
 
 client.on("messageCreate", message =>{
-
+    userselectedcrypto[message.author.id] = "BTC";
 
     function selectcrypto(){
         if(!args[1]){
             message.channel.send("syntax: +selectCrypto [crypto]");
         }else{
-            args[1].toUpperCase();
+            args[1]= args[1].toUpperCase();
             userselectedcrypto[message.author.id] = args[1];
             message.channel.send(`you have selected ${userselectedcrypto[message.author.id]} as your form of cryptocurrency`);
         }
@@ -104,7 +104,7 @@ client.on("messageCreate", message =>{
                         { name: 'bal', value: `shows you your crypto balance :moneybag:`},
                     )
                     .setColor("#0099ff")
-                    .setAuthor("Helene,Jakob,Szymon")
+                    .setAuthor("Helene,Jakob")
                     .setTimestamp()
                 message.channel.send({ embeds: [embed]});
         break;
@@ -169,6 +169,24 @@ client.on("messageCreate", message =>{
                 message.channel.send({ embeds: [embed1]});
                 };
                 fetchReddit();
+            };
+        break;
+        case "give":
+            if(!args[2]){
+                message.channel.send("Syntax: +give [amount] [@player]");
+            } else{
+                if(typeof(args[1]) == 'number' && userselectedcrypto[message.author.id] == userselectedcrypto[message.mentions.users.first()]){
+                    var usertag = message.mentions.users.first().id;
+                    if(!usertag == message.author.id){
+                        bankBalances[message.author.id] = bankBalances[message.author.id] - args[1];
+                        bankBalances[usertag] += args[1];
+                        message.channel.send(`you have successfully given ${args[1]} to ${args[2]}`);
+                    } else {
+                        message.channel.send("you cant give yourself money")
+                    }
+                } else {
+                    message.channel.send("Either the money argument needs to be a number or the person you are trying to give money doesn't have the the same currency as you");
+                }
             };
         break;
         default:
