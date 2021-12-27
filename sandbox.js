@@ -1,6 +1,6 @@
 const { Client, Intents, Message, MessageEmbed, User, MessageAttachment, Guild } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: ["GUILDS","GUILD_VOICE_STATES","GUILD_MESSAGES"]});
 //importer json fil for å skjule token så det ikke blir resatt hver gang vi pusher botten til main
 let config = require('./config.json');
 
@@ -8,6 +8,11 @@ const userselectedcrypto = {};
 
 const prefix ="+";
 
+//variabler for musikk
+const ytdl = require("ytdl-core");
+const ytSearch = require("yt-search");
+const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require('@discordjs/voice');
+let connection = null;
 // GAME VARIABLES
 let bankBalances = {};
 // GAME VARIABLES
@@ -188,6 +193,52 @@ client.on("messageCreate", message =>{
                     message.channel.send("Either the money argument needs to be a number or the person you are trying to give money doesn't have the the same currency as you");
                 }
             };
+        break;
+        case "play":
+        async function playSong(){
+            let voiceChannel = message.member.voice.channel;
+            if(!voiceChannel){
+                message.channel.send("you need to be in a voice channel to use this command!");
+            }else{
+                if(!args[0]){
+                    message.channel.send("Syntax: +play [song]")
+                }else{
+                    connection =  joinVoiceChannel({
+                        selfDeaf: false,
+                        channelId: message.member.voice.channel.id,
+                        guildId: message.guild.id,
+                        adapterCreator: message.guild.voiceAdapterCreator
+                    })
+                    const videoFinder = async (query) => {
+                        const videoResult = await ytSearch(query);
+                        return(videoResult.videos.length > 1) ? videoResult.videos[0] : null;
+                    }
+                    const video = await videoFinder(args.join(' '));
+                    if (video){
+                        const stream = ytdl(video.url, {filter: "audioonly"});
+
+                        async function play() {
+                            const player = createAudioPlayer();
+                            const resource = createAudioResource(stream);
+                            connection.subscribe(player);
+                            await player.play(resource);
+                            player.on('idle', () => {connection.disconnect()});
+                        };
+                        await play().catch(e => console.log(e));
+                        await message.reply(`:thumbsup: Now Playing ***${video.title}***`)
+                    } else{
+                        message.channel.send("no video results found...");
+                    }
+                }
+            }
+        }
+        async function awaitPlaySong(){
+            await playSong();
+        };
+        awaitPlaySong();
+        break;
+        case "stop":
+            connection.disconnect();
         break;
         default:
             message.channel.send("this is not a valid command, to see all commands type +help");
