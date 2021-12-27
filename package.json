@@ -17,8 +17,14 @@
   },
   "homepage": "https://github.com/JakobDanielsen/discordbot#readme",
   "dependencies": {
+    "@discordjs/voice": "^0.7.5",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
-    "fs": "*"
+    "ffmpeg": "^0.0.4",
+    "fs": "*",
+    "libsodium-wrappers": "^0.7.9",
+    "tweetnacl": "^1.0.3",
+    "yt-search": "^2.10.2",
+    "ytdl-core": "^4.9.2"
   }
 }
