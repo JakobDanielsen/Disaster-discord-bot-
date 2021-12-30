@@ -77,11 +77,19 @@ client.on("messageCreate", message =>{
         if (args[1] > bankBalances[message.author.id] || args[1] == null) {
             message.channel.send("You must have the amount of money you bet")
         } else if (3 == Math.round(Math.random()*3)) {
+            if(args[1] > 0){
             bankBalances[message.author.id] += args[1]*3;
             message.channel.send(`You Won! New balance is ${bankBalances[message.author.id]} ${userselectedcrypto[message.author.id]} `)
+            }else{
+                message.channel.send("your bet needs to be a positive number")
+            }
         } else {
+            if(args[1] > 0){
             bankBalances[message.author.id] -= args[1];
             message.channel.send(`Better luck next time! New balance is ${bankBalances[message.author.id]} ${userselectedcrypto[message.author.id]} `)
+            }else{
+                message.channel.send("your bet needs to be a positive number")
+            }
         }
     }
 
@@ -196,7 +204,7 @@ client.on("messageCreate", message =>{
         break;
         case "play":
         async function playSong(){
-            let voiceChannel = message.member.voice.channel;
+            let voiceChannel = message.member.voice.channel; 
             if(!voiceChannel){
                 message.channel.send("you need to be in a voice channel to use this command!");
             }else{
@@ -245,6 +253,7 @@ client.on("messageCreate", message =>{
         break; 
     };
 });
+
 client.login(config.token);
 
 
