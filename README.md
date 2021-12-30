@@ -12,7 +12,7 @@ Our developers are a important part of making the bot, perhaps the most importan
 Therefore we give special thanks to:
 
 * [Jakob Danielsen](https://github.com/JakobDanielsen)
-* [Helene Amlo](https://github.com/henningamlo)
+* [Helene Amlo](https://github.com/heleneamlo)
 
 ## 💎 Benefits
 
