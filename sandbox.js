@@ -74,22 +74,20 @@ client.on("messageCreate", message =>{
         }
     };
     function bet() {
-        if (args[1] > bankBalances[message.author.id] || args[1] == null) {
-            message.channel.send("You must have the amount of money you bet")
-        } else if (3 == Math.round(Math.random()*3)) {
-            if(args[1] > 0){
-            bankBalances[message.author.id] += args[1]*3;
-            message.channel.send(`You Won! New balance is ${bankBalances[message.author.id]} ${userselectedcrypto[message.author.id]} `)
-            }else{
-                message.channel.send("your bet needs to be a positive number")
+        if(args[1] > 0 && typeof(args[1] == "number")){
+            if (args[1] > bankBalances[message.author.id] || args[1] == null) {
+                message.channel.send("You must have the amount of money you bet");
+                return
+            }
+            if (3 == Math.round(Math.random()*3)) { 
+                bankBalances[message.author.id] += args[1]*3;
+                message.channel.send(`You Won! New balance is ${bankBalances[message.author.id]} ${userselectedcrypto[message.author.id]} `);
+            } else {
+                bankBalances[message.author.id] -= args[1];
+                message.channel.send(`Better luck next time! New balance is ${bankBalances[message.author.id]} ${userselectedcrypto[message.author.id]} `);
             }
         } else {
-            if(args[1] > 0){
-            bankBalances[message.author.id] -= args[1];
-            message.channel.send(`Better luck next time! New balance is ${bankBalances[message.author.id]} ${userselectedcrypto[message.author.id]} `)
-            }else{
-                message.channel.send("your bet needs to be a positive number")
-            }
+            message.channel.send("your bet needs to be a positive number");
         }
     }
 
