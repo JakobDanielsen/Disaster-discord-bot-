@@ -18,6 +18,7 @@ let bankBalances = {};
 // GAME VARIABLES
 
 client.once('ready', (message) =>{
+    
     client.user.setPresence({ activities: [{ name: '+help', type: 'PLAYING' }], status: 'online' });
     
     //Når botten skrus på, finn en kanal kalt disaster, deretter send en melding der hvor boten pinger alle.
@@ -41,20 +42,26 @@ client.once('ready', (message) =>{
 
 
 client.on("messageCreate", message =>{
-    userselectedcrypto[message.author.id] = "BTC";
-
-    function selectcrypto(){
+    function checkIfSelectedCrypto(){
+        if(userselectedcrypto[message.author.id]){
+            return;
+        }else{
+            userselectedcrypto[message.author.id] = "BTC";
+        }
+    }
+    function selectCrypto(){
+        checkIfSelectedCrypto();
         if(!args[1]){
             message.channel.send("syntax: +selectCrypto [crypto]");
         }else{
-            args[1]= args[1].toUpperCase();
+            args[1] = args[1].toUpperCase();
             userselectedcrypto[message.author.id] = args[1];
             message.channel.send(`you have selected ${userselectedcrypto[message.author.id]} as your form of cryptocurrency`);
         }
     };
 
     function getBitcoin() {
-    
+        checkIfSelectedCrypto();
         if (bankBalances[message.author.id] == null ) {
             bankBalances[message.author.id] = 10;
             message.channel.send("You were given 10: " + userselectedcrypto[message.author.id]);
@@ -74,6 +81,7 @@ client.on("messageCreate", message =>{
         }
     };
     function bet() {
+        checkIfSelectedCrypto();
         if(args[1] > 0 && typeof(args[1] == "number")){
             if (args[1] > bankBalances[message.author.id] || args[1] == null) {
                 message.channel.send("You must have the amount of money you bet");
@@ -124,7 +132,9 @@ client.on("messageCreate", message =>{
 
         // GAME SECTION //
         case"selectcrypto":
-            selectcrypto();
+        case"select":
+        case"selectCrypto":
+            selectCrypto();
         break;
 
         case "getcrypto":
@@ -142,6 +152,7 @@ client.on("messageCreate", message =>{
         message.channel.send(`You have ${bankBalances[message.author.id]} ${userselectedcrypto[message.author.id]} `);
         break;
         case"value":
+                checkIfSelectedCrypto();
                 async function fetch(){
                 const fetch = require("node-fetch");
                 let data = await fetch(`http://api.coinlayer.com/api/live?access_key=223df91f83bcba306ce587bce6cc0fd8`).then(res =>
