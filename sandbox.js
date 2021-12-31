@@ -83,6 +83,7 @@ client.on("messageCreate", message =>{
     function bet() {
         if(bankBalances[message.author.id] == null){
             getBitcoin();
+            bet();
         }else{
         checkIfSelectedCrypto();
         if(args[1] > 0 && typeof(args[1] == "number")){
@@ -90,7 +91,7 @@ client.on("messageCreate", message =>{
                     message.channel.send("You must have the amount of money you bet");
                     return
                 }
-                if (3 == Math.round(Math.random()*3)) { 
+                if (3 == Math.ceil(Math.random()*3)) { 
                     bankBalances[message.author.id] += args[1]*3;
                     message.channel.send(`You Won! New balance is ${bankBalances[message.author.id]} ${userselectedcrypto[message.author.id]} `);
                 } else {
