@@ -112,7 +112,7 @@ client.on("messageCreate", message =>{
     }
     
 
-    //let mention = message.mentions.user.first();
+    let mention = message.mentions;
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(" ");
@@ -261,6 +261,31 @@ client.on("messageCreate", message =>{
         break;
         case "stop":
             connection.disconnect();
+        break;
+        case"ban":
+        if(!args[2]){
+            message.channel.send("syntax: +ban [user] [reason]")
+            message.channel.send("grr, her er args: " + args)
+        }else{
+            async function ban(){
+            const user = message.mentions.members.first();
+            const reason = args[2]
+            if (!reason) return message.channel.send('syntax: +ban [user] [reason]');
+
+            if (user) {
+            await user.ban({
+                reason: reason,
+            }).then(() => {
+                message.channel.send('banned!')
+            })
+        } else {
+            message.channel.send('cant find the user!')
+        }
+            let server = message.guild.name;
+            user.send(`you have been banned from: ***${server}*** for: ***${args[2]}***`)
+        };
+        ban();
+        };
         break;
         default:
             message.channel.send("this is not a valid command, to see all commands type +help");
