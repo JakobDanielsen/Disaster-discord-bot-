@@ -106,20 +106,23 @@ client.on("messageCreate", message =>{
 
     // lånt fra nettet :)
     function thousandsSeparators(num) {
-        let num_parts = num.toString().split(".");
-        num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        return num_parts.join(".");
+        if(num != null){
+            let num_parts = num.toString().split(".");
+            num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return num_parts.join(".");
+        }else{
+            message.channel.send("something went wrong, make sure that you have selected a valid cryptocurrency!")
+        }
     }
-    
-
-    let mention = message.mentions;
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(" ");
+    try{
     switch (args[0]){
         case"help":
         case"Help":
-            let embed = new MessageEmbed()
+            try{
+                let embed = new MessageEmbed()
                     .setTitle(`Disaster bot`)
                     .addFields(
                         { name: 'selectcrypto', value: `select your cryptocurrency :sunglasses:`},
@@ -131,6 +134,10 @@ client.on("messageCreate", message =>{
                     .setAuthor("Helene,Jakob")
                     .setTimestamp()
                 message.channel.send({ embeds: [embed]});
+            } catch (err) {
+                message.channel.send('An error occured');
+                console.error(err);
+            } 
         break;
         case "getTeamsMessages":
         break;
@@ -139,160 +146,224 @@ client.on("messageCreate", message =>{
         case"selectcrypto":
         case"select":
         case"selectCrypto":
-            selectCrypto();
+            try{
+                selectCrypto();
+            } catch (err) {
+                message.channel.send('An error occured');
+                console.error(err);
+            }     
         break;
 
         case "getcrypto":
         case "Getcrypto":
         case "get":
-        getBitcoin();
+            try{
+                getBitcoin();
+            } catch (err) {
+                message.channel.send('An error occured');
+                console.error(err);
+            } 
         break;
         
         case "bet":
-              bet();
+            try{
+                bet();
+            } catch (err) {
+                message.channel.send('An error occured');
+                console.error(err);
+            }  
         break;
         case "bal": 
         case"Balance": 
         case "balance":
-        message.channel.send(`You have ${bankBalances[message.author.id]} ${userselectedcrypto[message.author.id]} `);
+            try{
+                message.channel.send(`You have ${bankBalances[message.author.id]} ${userselectedcrypto[message.author.id]} `);
+            } catch (err) {
+                message.channel.send('An error occured');
+                console.error(err);
+            }
         break;
         case"value":
-                checkIfSelectedCrypto();
-                async function fetch(){
-                const fetch = require("node-fetch");
-                let data = await fetch(`http://api.coinlayer.com/api/live?access_key=223df91f83bcba306ce587bce6cc0fd8`).then(res =>
-                res.json()) .catch(console.error())
-                let userdata = data.rates[userselectedcrypto[message.author.id]];
-                let btcvalue = Math.round(bankBalances[message.author.id] * userdata );
-                let embed1 = new MessageEmbed()
-                    .addFields(
-                        {name:`Your ${userselectedcrypto[message.author.id]} : `, value: `${thousandsSeparators(bankBalances[message.author.id])}`},
-                        {name: "USD equivalent: ", value: `${thousandsSeparators(btcvalue)} $`}
-                    )
-                    .setColor("#0099ff")
-                    .setTimestamp()
-                message.channel.send({ embeds: [embed1]});
-                };
-                fetch();
+        try{
+            checkIfSelectedCrypto();
+            async function fetch(){
+            const fetch = require("node-fetch");
+            let data = await fetch(`http://api.coinlayer.com/api/live?access_key=223df91f83bcba306ce587bce6cc0fd8`).then(res =>
+            res.json()) .catch(console.error())
+            let userdata = data.rates[userselectedcrypto[message.author.id]];
+            let btcvalue = Math.round(bankBalances[message.author.id] * userdata );
+            let embed1 = new MessageEmbed()
+                .addFields(
+                    {name:`Your ${userselectedcrypto[message.author.id]} : `, value: `${thousandsSeparators(bankBalances[message.author.id])}`},
+                    {name: "USD equivalent: ", value: `${thousandsSeparators(btcvalue)} $`}
+                )
+                .setColor("#0099ff")
+                .setTimestamp()
+            message.channel.send({ embeds: [embed1]});
+            };
+            fetch();
+        } catch (err) {
+            message.channel.send('An error occured');
+            console.error(err);
+        }
         break;
         case "flip":
-            flip();
+            try{
+                flip();
+            } catch (err) {
+                message.channel.send('An error occured');
+                console.error(err);
+            }
         break;
         case "subreddit":
-            if(!args[1]){
-                message.channel.send("Syntax: +subreddit [subreddit]");
-            }else{
-                async function fetchReddit(){
-                const fetch = require("node-fetch");
-                let data = await fetch(`http://meme-api.herokuapp.com/gimme/${args[1]}`).then(res =>
-                res.json()) .catch(console.error())
-                let embed1 = new MessageEmbed()
-                    .setTitle(`here is a post from ${args[1]}`)
-                    .setURL(data.postLink)
-                    .setColor("#0099ff")
-                    .setFooter(data.ups + " Upvotes")
-                    .setTimestamp()
-                    .setImage(data.url)
-                message.channel.send({ embeds: [embed1]});
+            try{
+                if(!args[1]){
+                    message.channel.send("Syntax: +subreddit [subreddit]");
+                }else{
+                    async function fetchReddit(){
+                    const fetch = require("node-fetch");
+                    let data = await fetch(`http://meme-api.herokuapp.com/gimme/${args[1]}`).then(res =>
+                    res.json()) .catch(console.error())
+                    let embed1 = new MessageEmbed()
+                        .setTitle(`here is a post from ${args[1]}`)
+                        .setURL(data.postLink)
+                        .setColor("#0099ff")
+                        .setFooter(data.ups + " Upvotes")
+                        .setTimestamp()
+                        .setImage(data.url)
+                    message.channel.send({ embeds: [embed1]});
+                    };
+                    fetchReddit();
                 };
-                fetchReddit();
-            };
+            } catch (err) {
+                message.channel.send('An error occured');
+                console.error(err);
+            }
         break;
         case "give":
-            if(!args[2]){
-                message.channel.send("Syntax: +give [amount] [@player]");
-            } else{
-                if(typeof(args[1]) == 'number' && userselectedcrypto[message.author.id] == userselectedcrypto[message.mentions.users.first()]){
-                    var usertag = message.mentions.users.first().id;
-                    if(!usertag == message.author.id){
-                        bankBalances[message.author.id] = bankBalances[message.author.id] - args[1];
-                        bankBalances[usertag] += args[1];
-                        message.channel.send(`you have successfully given ${args[1]} to ${args[2]}`);
+            try{
+                if(!args[2]){
+                    message.channel.send("Syntax: +give [amount] [@player]");
+                } else{
+                    if(typeof(args[1]) == 'number' && userselectedcrypto[message.author.id] == userselectedcrypto[message.mentions.users.first()]){
+                        var usertag = message.mentions.users.first().id;
+                        if(!usertag == message.author.id){
+                            bankBalances[message.author.id] = bankBalances[message.author.id] - args[1];
+                            bankBalances[usertag] += args[1];
+                            message.channel.send(`you have successfully given ${args[1]} to ${args[2]}`);
+                        } else {
+                            message.channel.send("you cant give yourself money")
+                        }
                     } else {
-                        message.channel.send("you cant give yourself money")
+                        message.channel.send("Either the money argument needs to be a number or the person you are trying to give money doesn't have the the same currency as you");
                     }
-                } else {
-                    message.channel.send("Either the money argument needs to be a number or the person you are trying to give money doesn't have the the same currency as you");
-                }
-            };
+                };
+            } catch (err) {
+                message.channel.send('An error occured');
+                console.error(err);
+            }
         break;
         case "play":
-        async function playSong(){
-            let voiceChannel = message.member.voice.channel; 
-            if(!voiceChannel){
-                message.channel.send("you need to be in a voice channel to use this command!");
-            }else{
-                if(!args[0]){
-                    message.channel.send("Syntax: +play [song]")
-                }else{
-                    connection =  joinVoiceChannel({
-                        selfDeaf: false,
-                        channelId: message.member.voice.channel.id,
-                        guildId: message.guild.id,
-                        adapterCreator: message.guild.voiceAdapterCreator
-                    })
-                    const videoFinder = async (query) => {
-                        const videoResult = await ytSearch(query);
-                        return(videoResult.videos.length > 1) ? videoResult.videos[0] : null;
-                    }
-                    const video = await videoFinder(args.join(' '));
-                    if (video){
-                        const stream = ytdl(video.url, {filter: "audioonly"});
-
-                        async function play() {
-                            const player = createAudioPlayer();
-                            const resource = createAudioResource(stream);
-                            connection.subscribe(player);
-                            await player.play(resource);
-                            player.on('idle', () => {connection.disconnect()});
-                        };
-                        await play().catch(e => console.log(e));
-                        await message.reply(`:thumbsup: Now Playing ***${video.title}***`)
-                    } else{
-                        message.channel.send("no video results found...");
+            try{
+                async function playSong(){
+                    let voiceChannel = message.member.voice.channel; 
+                    if(!voiceChannel){
+                        message.channel.send("you need to be in a voice channel to use this command!");
+                    }else{
+                        if(!args[0]){
+                            message.channel.send("Syntax: +play [song]")
+                        }else{
+                            connection =  joinVoiceChannel({
+                                selfDeaf: false,
+                                channelId: message.member.voice.channel.id,
+                                guildId: message.guild.id,
+                                adapterCreator: message.guild.voiceAdapterCreator
+                            })
+                            const videoFinder = async (query) => {
+                                const videoResult = await ytSearch(query);
+                                return(videoResult.videos.length > 1) ? videoResult.videos[0] : null;
+                            }
+                            const video = await videoFinder(args.join(' '));
+                            if (video){
+                                const stream = ytdl(video.url, {filter: "audioonly"});
+        
+                                async function play() {
+                                    const player = createAudioPlayer();
+                                    const resource = createAudioResource(stream);
+                                    connection.subscribe(player);
+                                    await player.play(resource);
+                                    player.on('idle', () => {connection.disconnect()});
+                                };
+                                await play().catch(e => console.log(e));
+                                function escapeMarkdown(text) {
+                                    var unescaped = text.replace(/\\(\*|_|`|~|\\)/g, '$1'); // unescape any "backslashed" character
+                                    var escaped = unescaped.replace(/(\*|_|`|~|\\)/g, '\\$1'); // escape *, _, `, ~, \
+                                    return escaped;
+                                  }
+                                await message.reply(`:thumbsup: Now Playing ***${escapeMarkdown(video.title)}***`)
+                            } else{
+                                message.channel.send("no video results found...");
+                            }
+                        }
                     }
                 }
+                async function awaitPlaySong(){
+                    await playSong();
+                };
+                awaitPlaySong();
+            } catch (err) {
+                message.channel.send('An error occured');
+                console.error(err);
             }
-        }
-        async function awaitPlaySong(){
-            await playSong();
-        };
-        awaitPlaySong();
         break;
         case "stop":
-            connection.disconnect();
+            try{
+                connection.disconnect();
+            } catch (err) {
+                message.channel.send('An error occured');
+                console.error(err);
+            }
         break;
         case"ban":
-        if(!args[2]){
-            message.channel.send("syntax: +ban [user] [reason]")
-            message.channel.send("grr, her er args: " + args)
-        }else{
-            async function ban(){
-            const user = message.mentions.members.first();
-            const reason = args[2]
-            if (!reason) return message.channel.send('syntax: +ban [user] [reason]');
-
-            if (user) {
-            await user.ban({
-                reason: reason,
-            }).then(() => {
-                message.channel.send('banned!')
-            })
-        } else {
-            message.channel.send('cant find the user!')
+        try {
+            if(!args[2]){
+                message.channel.send("syntax: +ban [user] [reason]")
+                message.channel.send("grr, her er args: " + args)
+            }else{
+                async function ban(){
+                const user = message.mentions.members.first();
+                const reason = args[2]
+                if (!reason) return message.channel.send('syntax: +ban [user] [reason]');
+    
+                if (user) {
+                await user.ban({
+                    reason: reason,
+                }).then(() => {
+                    message.channel.send('banned!')
+                })
+            } else {
+                message.channel.send('cant find the user!')
+            }
+                let server = message.guild.name;
+                user.send(`you have been banned from: ***${server}*** for: ***${args[2]}***`)
+            };
+            ban()
+            };
+        } catch (err) {
+            message.channel.send('An error occured');
+            console.error(err);
         }
-            let server = message.guild.name;
-            user.send(`you have been banned from: ***${server}*** for: ***${args[2]}***`)
-        };
-        ban();
-        };
+
         break;
         default:
             message.channel.send("this is not a valid command, to see all commands type +help");
         break; 
     };
+} catch (err) {
+    message.channel.send('An error occured');
+    console.error(err);
+} 
 });
-
 client.login(config.token);
 
 
