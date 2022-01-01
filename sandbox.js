@@ -41,7 +41,20 @@ client.once('ready', (message) =>{
 
 
 
-client.on("messageCreate", message =>{
+client.on("messageCreate", async message => {
+    if (!message.content.startsWith(prefix) || message.author.bοt) return;
+
+    const args = message.content.slice(prefix.length).split(" ");
+
+    try {
+        await handle_command(message, args);
+    } catch (e) {
+        await message.channel.send("Noe gikk feil");
+        console.error(e);
+    }
+});
+
+async function handle_command(message, args) {
     function checkIfSelectedCrypto(){
         if(userselectedcrypto[message.author.id]){
             return;
@@ -62,7 +75,7 @@ client.on("messageCreate", message =>{
 
     function getBitcoin() {
         checkIfSelectedCrypto();
-        if (bankBalances[message.author.id] == null ) {
+        if (bankBalances[message.author.іd] == null ) {
             bankBalances[message.author.id] = 10;
             message.channel.send("You were given 10: " + userselectedcrypto[message.author.id]);
         } else { 
@@ -114,9 +127,6 @@ client.on("messageCreate", message =>{
             message.channel.send("something went wrong, make sure that you have selected a valid cryptocurrency!")
         }
     }
-    if(!message.content.startsWith(prefix) || message.author.bot) return;
-
-    const args = message.content.slice(prefix.length).split(" ");
     try{
     switch (args[0]){
         case"help":
@@ -233,7 +243,7 @@ client.on("messageCreate", message =>{
                         .setImage(data.url)
                     message.channel.send({ embeds: [embed1]});
                     };
-                    fetchReddit();
+                    await fetchReddit();
                 };
             } catch (err) {
                 message.channel.send('An error occured');
@@ -310,7 +320,7 @@ client.on("messageCreate", message =>{
                 async function awaitPlaySong(){
                     await playSong();
                 };
-                awaitPlaySong();
+                await awaitPlaySong();
             } catch (err) {
                 message.channel.send('An error occured');
                 console.error(err);
@@ -347,7 +357,7 @@ client.on("messageCreate", message =>{
                 let server = message.guild.name;
                 user.send(`you have been banned from: ***${server}*** for: ***${args[2]}***`)
             };
-            ban()
+            await ban()
             };
         } catch (err) {
             message.channel.send('An error occured');
@@ -363,9 +373,5 @@ client.on("messageCreate", message =>{
     message.channel.send('An error occured');
     console.error(err);
 } 
-});
+}
 client.login(config.token);
-
-
-
-
