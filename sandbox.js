@@ -143,9 +143,9 @@ async function handle_command(message, args) {
                         { name: 'subreddit', value: `sends a random picture from a chosen subreddit :thumbsup:`},
                         { name: 'flip', value: `flips a coin! :coin:`},
                         { name: 'play', value: `play music in a voice channel :loud_sound:`},
-                        { name: 'stop', value: `stops the music playing and disconnects the bot from the voicechannel :speaker:`},
+                        { name: 'stop', value: `stops the music playing and disconnects the bot from the voicechannel :mute:`},
                         { name: 'ban', value: `bans a specified user :x:`},
-                        { name: 'kick', value: `kicks a specified user :x:`}
+                        { name: 'kick', value: `kicks a specified user :warning:`}
                     )
                     .setColor("#0099ff")
                     .setAuthor("Helene,Jakob")
