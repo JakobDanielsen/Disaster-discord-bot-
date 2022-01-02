@@ -139,6 +139,12 @@ async function handle_command(message, args) {
                         { name: 'getcrypto', value: `get the crypto for your game :partying_face:`},
                         { name: 'bet', value: `Bet some crypto!!`},
                         { name: 'bal', value: `shows you your crypto balance :moneybag:`},
+                        { name: 'value', value: `shows you the value of your cryptocurrency in dollars`},
+                        { name: 'subreddit', value: `sends a random picture from a chosen subreddit :thumbsup:`},
+                        { name: 'flip', value: `flips a coin! :coin:`},
+                        { name: 'play', value: `play music in a voice channel :loud_sound:`},
+                        { name: 'stop', value: `stops the music playing and disconnects the bot from the voicechannel :speaker:`},
+                        { name: 'ban', value: `bans a specified user :x:`},
                     )
                     .setColor("#0099ff")
                     .setAuthor("Helene,Jakob")
@@ -163,7 +169,6 @@ async function handle_command(message, args) {
                 console.error(err);
             }     
         break;
-
         case "getcrypto":
         case "Getcrypto":
         case "get":
@@ -195,7 +200,10 @@ async function handle_command(message, args) {
         break;
         case"value":
         try{
-            checkIfSelectedCrypto();
+            if(bankBalances[message.author.id] == null){
+                getBitcoin();
+                message.channel.send("since you had no cryptocurrency to get the value of, we gave you 10 Bitcoin, run the command again if you want to see its value!")
+            }else{
             async function fetch(){
             const fetch = require("node-fetch");
             let data = await fetch(`http://api.coinlayer.com/api/live?access_key=223df91f83bcba306ce587bce6cc0fd8`).then(res =>
@@ -212,6 +220,7 @@ async function handle_command(message, args) {
             message.channel.send({ embeds: [embed1]});
             };
             fetch();
+        };
         } catch (err) {
             message.channel.send('An error occured');
             console.error(err);
