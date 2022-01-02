@@ -347,7 +347,6 @@ async function handle_command(message, args) {
         try {
             if(!args[2]){
                 message.channel.send("syntax: +ban [user] [reason]")
-                message.channel.send("grr, her er args: " + args)
             }else{
                 async function ban(){
                 const user = message.mentions.members.first();
@@ -367,6 +366,35 @@ async function handle_command(message, args) {
                 user.send(`you have been banned from: ***${server}*** for: ***${args[2]}***`)
             };
             await ban()
+            };
+        } catch (err) {
+            message.channel.send('An error occured');
+            console.error(err);
+        }
+        break;
+        case"kick":
+        try {
+            if(!args[2]){
+                message.channel.send("syntax: +kick [user] [reason]")
+            }else{
+                async function kick(){
+                const user = message.mentions.members.first();
+                const reason = args[2]
+                if (!reason) return message.channel.send('syntax: +ban [user] [reason]');
+    
+                if (user) {
+                await user.kick({
+                    reason: reason,
+                }).then(() => {
+                    message.channel.send('kicked this user!')
+                })
+            } else {
+                message.channel.send('cant find the user!')
+            }
+                let server = message.guild.name;
+                user.send(`you have been kicked from: ***${server}*** for: ***${args[2]}***`)
+            };
+            await kick()
             };
         } catch (err) {
             message.channel.send('An error occured');
