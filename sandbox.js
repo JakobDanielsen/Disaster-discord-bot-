@@ -346,13 +346,17 @@ async function handle_command(message, args) {
             }
         break;
         case"list":
-        if (bankBalances == !null) {
-            console.log(bankBalances)
-        message.channel.send(bankBalances)
-        } else {
-            message.channel.send("bankBalances is empty at the moment")
-        }
-        
+            try{
+                if (bankBalances) {
+                    console.log(bankBalances)
+                    message.channel.send(bankBalances)
+                } else {
+                    message.channel.send("bankBalances is empty at the moment")
+                }
+            } catch (err) {
+                message.channel.send('An error occured');
+                console.error(err);
+            };
         break;
         case"ban":
         try {
