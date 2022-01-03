@@ -346,8 +346,13 @@ async function handle_command(message, args) {
             }
         break;
         case"list":
-        console.log(bankBalances[message.author.id])
-        message.channel.send(bankBalances[message.author.id])
+        if (bankBalances == !null) {
+            console.log(bankBalances)
+        message.channel.send(bankBalances)
+        } else {
+            message.channel.send("bankBalances is empty at the moment")
+        }
+        
         break;
         case"ban":
         try {
