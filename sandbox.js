@@ -357,6 +357,14 @@ async function handle_command(message, args) {
                 message.channel.send('An error occured');
                 console.error(err);
             };
+
+        if (bankBalances == !null) {
+            console.log(bankBalances)
+        message.channel.send(`Here's the list: ${bankBalances}`)
+        } else {
+            message.channel.send("bankBalances is empty at the moment")
+        }
+
         break;
         case"ban":
         try {
