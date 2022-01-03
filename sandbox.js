@@ -348,11 +348,11 @@ async function handle_command(message, args) {
         case"list":
         if (bankBalances == !null) {
             console.log(bankBalances)
-        message.channel.send(bankBalances)
+        message.channel.send(`Here's the list: ${bankBalances}`)
         } else {
             message.channel.send("bankBalances is empty at the moment")
         }
-        
+
         break;
         case"ban":
         try {
