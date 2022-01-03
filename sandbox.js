@@ -1,6 +1,6 @@
 const { Client, Intents, Message, MessageEmbed, User, MessageAttachment, Guild } = require('discord.js');
 
-const client = new Client({ intents: ["GUILDS","GUILD_VOICE_STATES","GUILD_MESSAGES"]});
+const client = new Client({ intents: ["GUILDS","GUILD_VOICE_STATES","GUILD_MESSAGES","GUILD_MEMBERS"]});
 //importer json fil for å skjule token så det ikke blir resatt hver gang vi pusher botten til main
 let config = require('./config.json');
 
@@ -19,7 +19,7 @@ let bankBalances = {};
 let list = [];
 
 client.once('ready', (message) =>{
-    
+    console.log("bot is on")
     client.user.setPresence({ activities: [{ name: '+help', type: 'PLAYING' }], status: 'online' });
     
     //Når botten skrus på, finn en kanal kalt disaster, deretter send en melding der hvor boten pinger alle.
@@ -40,6 +40,24 @@ client.once('ready', (message) =>{
     }
 });
 
+client.on('guildMemberAdd', (member) => {
+    const channel = member.guild.channels.cache.find(channel => channel.name === "welcome")
+    const channelwelcomeEmbed = new MessageEmbed()
+       .setColor('#ffd6d6')
+       .setTitle('Welcome!')
+       .setDescription(`${member} just joined the discord! Make sure to read #rules`)
+       .setTimestamp();
+    channel.send({ embeds: [channelwelcomeEmbed]});
+    const dmwelcomeEmbed = new MessageEmbed()
+       .setColor('#ffd6d6')
+       .setTitle('Welcome!')
+       .setDescription("For Help Using Disaster bot, Send The Command `+help` In the server")
+       .setTimestamp();
+    member.send( { embeds: [dmwelcomeEmbed]});
+    let role6 = member.guild.roles.cache.find(role => role.name == "Disaster bot enthusiast"); //BASIC ROLE, EVERYONE GETS IT
+    if (!role6) return channel.reply("Couldn't find that Role .")
+    member.roles.add(role6);
+ });
 
 
 client.on("messageCreate", async message => {
