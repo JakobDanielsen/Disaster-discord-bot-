@@ -75,11 +75,11 @@ async function handle_command(message, args) {
 
     function getBitcoin() {
         checkIfSelectedCrypto();
-        if (bankBalances[message.author.іd] == null ) {
+        if (bankBalances[message.author.id] == null ) {
             bankBalances[message.author.id] = 10;
             message.channel.send("You were given 10: " + userselectedcrypto[message.author.id]);
         } else { 
-            message.channel.send("You have already recieved your startup money")
+            message.channel.send("You have already received your startup money")
         }
     }
     function flip(){
@@ -265,8 +265,8 @@ async function handle_command(message, args) {
                 if(!args[2]){
                     message.channel.send("Syntax: +give [amount] [@player]");
                 } else{
-                    if(typeof(args[1]) == 'number' && userselectedcrypto[message.author.id] == userselectedcrypto[message.mentions.users.first()]){
-                        var usertag = message.mentions.users.first().id;
+                    if(typeof(args[1]) == 'number' && userselectedcrypto[message.author.id] == userselectedcrypto[message.mentions.users.first().id]){
+                        var usertag = message.mentions.members.first().id;
                         if(!usertag == message.author.id){
                             bankBalances[message.author.id] = bankBalances[message.author.id] - args[1];
                             bankBalances[usertag] += args[1];
