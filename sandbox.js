@@ -16,6 +16,7 @@ let connection = null;
 // GAME VARIABLES
 let bankBalances = {};
 // GAME VARIABLES
+let list = [];
 
 client.once('ready', (message) =>{
     
@@ -343,6 +344,10 @@ async function handle_command(message, args) {
                 message.channel.send('An error occured');
                 console.error(err);
             }
+        break;
+        case"list":
+        console.log(bankBalances[message.author.id])
+        message.channel.send(bankBalances[message.author.id])
         break;
         case"ban":
         try {
