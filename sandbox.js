@@ -366,8 +366,14 @@ async function handle_command(message, args) {
         case"list":
             try{
                 if (bankBalances) {
-                    console.log(bankBalances)
-                    message.channel.send(`Here's the list: ${bankBalances}`)
+            console.log(bankBalances)
+            console.log(list)
+
+            bankBalances.forEach(e => {
+                list.push(e)
+            });
+
+            message.channel.send(`Here's the list: ${list}`)
                 } else {
                     message.channel.send("bankBalances is empty at the moment")
                 }
@@ -375,6 +381,7 @@ async function handle_command(message, args) {
                 message.channel.send('An error occured');
                 console.error(err);
             };
+
         break;
         case"ban":
         try {
