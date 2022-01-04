@@ -348,7 +348,12 @@ async function handle_command(message, args) {
         case"list":
         if (bankBalances == !null) {
             console.log(bankBalances)
-        message.channel.send(`Here's the list: ${bankBalances}`)
+            console.log(list)
+
+            bankBalances.forEach(e => {
+                list.push(e)
+            });
+        message.channel.send(`Here's the list: ${list}`)
         } else {
             message.channel.send("bankBalances is empty at the moment")
         }
