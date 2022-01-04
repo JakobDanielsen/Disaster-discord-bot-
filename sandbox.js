@@ -16,6 +16,7 @@ let connection = null;
 // GAME VARIABLES
 let bankBalances = {};
 // GAME VARIABLES
+
 let list = [];
 
 client.once('ready', (message) =>{
@@ -314,6 +315,7 @@ async function handle_command(message, args) {
                         }else{
                             connection =  joinVoiceChannel({
                                 selfDeaf: false,
+                                maxMissedFrames: 1000000,
                                 channelId: message.member.voice.channel.id,
                                 guildId: message.guild.id,
                                 adapterCreator: message.guild.voiceAdapterCreator
