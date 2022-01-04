@@ -367,13 +367,20 @@ async function handle_command(message, args) {
         break;
         case"list":
             try{
+
+
                 if (bankBalances) {
                     console.log(bankBalances)
-                    message.channel.send(`Here's the list: ${JSON.stringify(bankBalances)}`)
-                    message.channel.send(`<@${message.author.id}>`)
+                    bankBalances.forEach(e => {
+                        list.push(JSON.stringify(e))
+                    });
+                    // message.channel.send(`Here's the list: ${JSON.stringify(bankBalances)}`)
+                    message.channel.send(list)
                 } else {
                     message.channel.send("bankBalances is empty at the moment")
                 }
+
+
             } catch (err) {
                 message.channel.send('An error occured');
                 console.error(err);
