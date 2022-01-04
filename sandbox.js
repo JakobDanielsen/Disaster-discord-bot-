@@ -3,7 +3,7 @@ const { Client, Intents, Message, MessageEmbed, User, MessageAttachment, Guild }
 const client = new Client({ intents: ["GUILDS","GUILD_VOICE_STATES","GUILD_MESSAGES","GUILD_MEMBERS"]});
 //importer json fil for å skjule token så det ikke blir resatt hver gang vi pusher botten til main
 let config = require('./config.json');
-
+const db = require("./db.json");
 const userselectedcrypto = {};
 
 const prefix ="+";
@@ -367,7 +367,8 @@ async function handle_command(message, args) {
             try{
                 if (bankBalances) {
                     console.log(bankBalances)
-                    message.channel.send(`Here's the list: ${bankBalances}`)
+                    message.channel.send(`Here's the list: ${JSON.stringify(bankBalances)}`)
+                    message.channel.send(`<@${message.author.id}>`)
                 } else {
                     message.channel.send("bankBalances is empty at the moment")
                 }
