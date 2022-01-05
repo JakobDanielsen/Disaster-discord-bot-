@@ -1,1 +1,23 @@
-# discordbot
+# Disaster bot
+A school project by: Jakob danielsen and Helene Amlo
+<a href="https://discord.gg/gscXkPQ3Nn"><img align="right" src="https://jakobdanielsen.github.io/discordbot/kh1.png" width=20%></a>
+
+Disaster bot is a fast, powerful, unopinionated, bot made with Javascipt using the official [Discord.js package](https://discord.com/developers/docs/intro).
+
+
+
+## 🎉 developers
+
+Our developers are a important part of making the bot, perhaps the most important part, therefore we think that they deserve praise.
+Therefore we give special thanks to:
+
+* [Jakob Danielsen](https://github.com/JakobDanielsen)
+* [Helene Amlo](https://github.com/heleneamlo)
+
+## 💎 Benefits
+
+* 🚀 **Fun** - Disaster bot can be used for all kinds of fun.
+
+* ⚔️ **Powerful** - Disaster bot uses Microsoft teams powerful api making it useful for teams, big or small. This makes it an incredible powerful bot.
+
+* 🏫 **Community** - We pride ourselves in our small but inclusive community and are willing to help whenever challenges arise; or if you just want to chat! We offer help on any questions. Be sure to visit us on our [Discord server](https://discord.gg/gscXkPQ3Nn)!

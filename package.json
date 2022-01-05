@@ -1,0 +1,32 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "\"discord bot for school\"",
+  "main": "sandbox.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JakobDanielsen/discordbot.git"
+  },
+  "author": "Helene Amlo, Jakob Danielsen, Szymon Popiolek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JakobDanielsen/discordbot/issues"
+  },
+  "homepage": "https://github.com/JakobDanielsen/discordbot#readme",
+  "dependencies": {
+    "@discordjs/voice": "github:discordjs/voice",
+    "discord.js": "^13.5.0",
+    "dotenv": "^10.0.0",
+    "events": "^3.3.0",
+    "ffmpeg": "^0.0.4",
+    "fs": "*",
+    "libsodium-wrappers": "^0.7.9",
+    "node-fetch": "^3.1.0",
+    "tweetnacl": "^1.0.3",
+    "yt-search": "^2.10.3",
+    "ytdl-core": "^4.9.2"
+  }
+}
