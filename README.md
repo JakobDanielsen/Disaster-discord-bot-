@@ -18,8 +18,6 @@ Therefore we give special thanks to:
 
 * 🚀 **Fun** - Disaster bot can be used for all kinds of fun.
 
-* 📜 **Useful** - Disaster bot can be used for getting teams messages, which is really useful if you forget an assignment
-
 * ⚔️ **Powerful** - Disaster bot uses Microsoft teams powerful api making it useful for teams, big or small. This makes it an incredible powerful bot.
 
 * 🏫 **Community** - We pride ourselves in our small but inclusive community and are willing to help whenever challenges arise; or if you just want to chat! We offer help on any questions. Be sure to visit us on our [Discord server](https://discord.gg/gscXkPQ3Nn)!
