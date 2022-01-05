@@ -368,12 +368,18 @@ async function handle_command(message, args) {
 
 
                 if (bankBalances) {
+                    if (Array.isArray(bankBalances)) {
+                        console.log("this is an array")
+                    } else {
+                        console.log("this is not an array")
+                    }
                     console.log(bankBalances)
                     bankBalances.forEach(e => {
                         list.push(JSON.stringify(e))
                     });
                     // message.channel.send(`Here's the list: ${JSON.stringify(bankBalances)}`)
                     message.channel.send(list)
+
                 } else {
                     message.channel.send("bankBalances is empty at the moment")
                 }
