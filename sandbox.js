@@ -67,6 +67,7 @@ client.on("messageCreate", async message => {
         userWarns[message.author.id] = 0;
     };
     forbiddenWords = ["nigger", "nigga", "fuck", "faggot", "homse", "tranny", "jævla", "motherfucker", "faen", "neger", "hore", "whore", "simp", "slut", "n igger", "ni gger", "nig ger", "9ger", "negro", "slave", "n1gger", "n1gg3r", "n igga", "n i g g e r", "n i g g a", "n i g ga", "ni g g a", "n i gga","n i gg a", "fucking", "n 1 g g a", "ni gg er", "nig ger", "ni gger", "n ig ger"]
+	forbiddenWords = Array.concat(forbiddenWords, ["søren", "fillern", "dæven", "i alle dager", "dust", "dumming", "slemming"]);
     for (let i = 0; i < forbiddenWords.length; i++) {
         try{
             if (message.content.includes(forbiddenWords[i])) {
