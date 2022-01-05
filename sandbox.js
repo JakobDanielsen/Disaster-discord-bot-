@@ -7,14 +7,16 @@ const userselectedcrypto = {};
 
 const prefix ="+";
 
-//variabler for musikk
+// MUSIC VARIABLE
 const ytdl = require("ytdl-core");
 const ytSearch = require("yt-search");
 const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require('@discordjs/voice');
 let connection = null;
 // GAME VARIABLES
 let bankBalances = {};
-// GAME VARIABLES
+
+// AUTOMODERATE VARIABLES
+let userWarns = {};
 
 let list = [];
 
@@ -61,16 +63,52 @@ client.on('guildMemberAdd', (member) => {
 
 
 client.on("messageCreate", async message => {
-    forbiddenWords = ["nigger", "nigga", "fuck", "faggot", "homse", "tranny", "jævla", "motherfucker", "faen", "neger", "hore", "whore", "simp", "slut", "n igger", "ni gger", "nig ger", "9ger", "negro", "slave", "n1gger", "n1gg3r", "n igga", "n i g g e r", "n i g g a", "n i g ga", "ni g g a", "n i gga","n i gg a", "fucking", "n 1 g g a"]
-    for (var i = 0; i < forbiddenWords.length; i++) {
+    if(userWarns[message.author.id] == null){
+        userWarns[message.author.id] = 0;
+    };
+    forbiddenWords = ["nigger", "nigga", "fuck", "faggot", "homse", "tranny", "jævla", "motherfucker", "faen", "neger", "hore", "whore", "simp", "slut", "n igger", "ni gger", "nig ger", "9ger", "negro", "slave", "n1gger", "n1gg3r", "n igga", "n i g g e r", "n i g g a", "n i g ga", "ni g g a", "n i gga","n i gg a", "fucking", "n 1 g g a", "ni gg er", "nig ger", "ni gger", "n ig ger"]
+    for (let i = 0; i < forbiddenWords.length; i++) {
         try{
             if (message.content.includes(forbiddenWords[i])) {
                 message.delete();
-                message.channel.send("Watch your language! <@" + message.author.id +">")
+                message.channel.send("Watch your language! <@" + message.author.id +">");
+                userWarns[message.author.id] += 1;
+                message.channel.send(`you now have: ${userWarns[message.author.id]} warnings <@${message.author.id}>`);
+                if(userWarns[message.author.id] >= 10){
+                    try {
+                        if(!args[2]){
+                            message.channel.send("syntax: +ban [user] [reason]")
+                        }else{
+                            async function ban(){
+                            const user = message.mentions.members.first();
+                            const reason = args[2]
+                            if (!reason) return message.channel.send('syntax: +ban [user] [reason]');
+                
+                            if (user) {
+                                user.ban({
+                                reason: reason,
+                            }).then(() => {
+                                message.channel.send('banned!')
+                            })
+                        } else {
+                            message.channel.send('cant find the user!')
+                        }
+                            let server = message.guild.name;
+                            user.send(`you have been banned from: ***${server}*** for: ***${args[2]}***`)
+                        };
+                            ban()
+                        };
+                    } catch (err) {
+                        message.channel.send('An error occured');
+                        console.error(err);
+                    }
+                } else{
+                    continue;
+                };
             break;
             } else{continue;}
         }catch (e) {
-            await message.channel.send("Noe gikk feil");
+            message.channel.send("Noe gikk feil");
             console.error(e);
         };
       };
