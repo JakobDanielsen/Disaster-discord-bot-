@@ -18,9 +18,8 @@
   "resolved" "https://registry.npmjs.org/@discordjs/collection/-/collection-0.4.0.tgz"
   "version" "0.4.0"
 
-"@discordjs/voice@^0.7.5":
-  "integrity" "sha512-lUk+CmIXNKslT6DkC9IF9rpsqhzlTiedauUCPBzepjd4XWxwBZiyVIzR6QpbAirxkAwCoAbbje+3Ho71PGLEAw=="
-  "resolved" "https://registry.npmjs.org/@discordjs/voice/-/voice-0.7.5.tgz"
+"@discordjs/voice@github:discordjs/voice":
+  "resolved" "git+ssh://git@github.com/discordjs/voice.git#3dabc30fca79212809d1191e0c2f2b54c3f8cdc7"
   "version" "0.7.5"
   dependencies:
     "@types/ws" "^8.2.0"
@@ -53,14 +52,7 @@
   "resolved" "https://registry.npmjs.org/@types/node/-/node-16.11.11.tgz"
   "version" "16.11.11"
 
-"@types/ws@^8.2.0":
-  "integrity" "sha512-SqQ+LhVZaJi7c7sYVkjWALDigi/Wy7h7Iu72gkQp8Y8OWw/DddEVBrTSKu86pQftV2+Gm8lYM61hadPKqyaIeg=="
-  "resolved" "https://registry.npmjs.org/@types/ws/-/ws-8.2.1.tgz"
-  "version" "8.2.1"
-  dependencies:
-    "@types/node" "*"
-
-"@types/ws@^8.2.2":
+"@types/ws@^8.2.0", "@types/ws@^8.2.2":
   "integrity" "sha512-NOn5eIcgWLOo6qW8AcuLZ7G8PycXu0xTxxkS6Q18VWFxgPUSOwV0pBj2a/4viNZVu25i7RIB7GttdkAIUUXOOg=="
   "resolved" "https://registry.npmjs.org/@types/ws/-/ws-8.2.2.tgz"
   "version" "8.2.2"
@@ -694,12 +686,7 @@
   "resolved" "https://registry.npmjs.org/when/-/when-3.7.8.tgz"
   "version" "3.7.8"
 
-"ws@^8.2.3":
-  "integrity" "sha512-Gs5EZtpqZzLvmIM59w4igITU57lrtYVFneaa434VROv4thzJyV6UjIL3D42lslWlI+D4KzLYnxSwtfuiO79sNw=="
-  "resolved" "https://registry.npmjs.org/ws/-/ws-8.3.0.tgz"
-  "version" "8.3.0"
-
-"ws@^8.4.0":
+"ws@^8.2.3", "ws@^8.4.0":
   "integrity" "sha512-IHVsKe2pjajSUIl4KYMQOdlyliovpEPquKkqbwswulszzI7r0SfQrxnXdWAEqOlDCLrVSJzo+O1hAwdog2sKSQ=="
   "resolved" "https://registry.npmjs.org/ws/-/ws-8.4.0.tgz"
   "version" "8.4.0"

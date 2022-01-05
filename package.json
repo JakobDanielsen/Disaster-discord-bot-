@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/JakobDanielsen/discordbot#readme",
   "dependencies": {
-    "@discordjs/voice": "^0.7.5",
+    "@discordjs/voice": "github:discordjs/voice",
     "discord.js": "^13.5.0",
     "dotenv": "^10.0.0",
     "events": "^3.3.0",
