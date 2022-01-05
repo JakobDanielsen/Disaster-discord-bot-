@@ -18,8 +18,9 @@
   "resolved" "https://registry.npmjs.org/@discordjs/collection/-/collection-0.4.0.tgz"
   "version" "0.4.0"
 
-"@discordjs/voice@github:discordjs/voice":
-  "resolved" "git+ssh://git@github.com/discordjs/voice.git#3dabc30fca79212809d1191e0c2f2b54c3f8cdc7"
+"@discordjs/voice@^0.7.5":
+  "integrity" "sha512-lUk+CmIXNKslT6DkC9IF9rpsqhzlTiedauUCPBzepjd4XWxwBZiyVIzR6QpbAirxkAwCoAbbje+3Ho71PGLEAw=="
+  "resolved" "https://registry.npmjs.org/@discordjs/voice/-/voice-0.7.5.tgz"
   "version" "0.7.5"
   dependencies:
     "@types/ws" "^8.2.0"
