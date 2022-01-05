@@ -61,6 +61,19 @@ client.on('guildMemberAdd', (member) => {
 
 
 client.on("messageCreate", async message => {
+    forbiddenWords = ["nigger", "nigga", "fuck", "faggot", "homse", "tranny", "jævla", "motherfucker", "faen", "neger", "hore", "whore", "simp", "slut", "n igger", "ni gger", "nig ger", "9ger", "negro", "slave", "n1gger", "n1gg3r", "n igga", "n i g g e r", "n i g g a", "n i g ga", "ni g g a", "n i gga","n i gg a", "fucking", "n 1 g g a"]
+    for (var i = 0; i < forbiddenWords.length; i++) {
+        try{
+            if (message.content.includes(forbiddenWords[i])) {
+                message.delete();
+                message.channel.send("Watch your language! <@" + message.author.id +">")
+            break;
+            } else{continue;}
+        }catch (e) {
+            await message.channel.send("Noe gikk feil");
+            console.error(e);
+        };
+      };
     if (!message.content.startsWith(prefix) || message.author.bοt) return;
 
     const args = message.content.slice(prefix.length).split(" ");
