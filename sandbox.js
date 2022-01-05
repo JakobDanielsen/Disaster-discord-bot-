@@ -7,14 +7,16 @@ const userselectedcrypto = {};
 
 const prefix ="+";
 
-//variabler for musikk
+// MUSIC VARIABLE
 const ytdl = require("ytdl-core");
 const ytSearch = require("yt-search");
 const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require('@discordjs/voice');
 let connection = null;
 // GAME VARIABLES
 let bankBalances = {};
-// GAME VARIABLES
+
+// AUTOMODERATE VARIABLES
+let userWarns = {};
 
 let list = [];
 
@@ -66,7 +68,40 @@ client.on("messageCreate", async message => {
         try{
             if (message.content.includes(forbiddenWords[i])) {
                 message.delete();
-                message.channel.send("Watch your language! <@" + message.author.id +">")
+                message.channel.send("Watch your language! <@" + message.author.id +">");
+                message.channel.send(`you now have: ${userWarns[message.author.id]} <@${message.author.id}>`);
+                userWarns[message.author.id] += 1;
+                if(userWarns >= 10){
+                    try {
+                        if(!args[2]){
+                            message.channel.send("syntax: +ban [user] [reason]")
+                        }else{
+                            async function ban(){
+                            const user = message.mentions.members.first();
+                            const reason = args[2]
+                            if (!reason) return message.channel.send('syntax: +ban [user] [reason]');
+                
+                            if (user) {
+                            await user.ban({
+                                reason: reason,
+                            }).then(() => {
+                                message.channel.send('banned!')
+                            })
+                        } else {
+                            message.channel.send('cant find the user!')
+                        }
+                            let server = message.guild.name;
+                            user.send(`you have been banned from: ***${server}*** for: ***${args[2]}***`)
+                        };
+                        await ban()
+                        };
+                    } catch (err) {
+                        message.channel.send('An error occured');
+                        console.error(err);
+                    }
+                } else{
+                    continue;
+                };
             break;
             } else{continue;}
         }catch (e) {
