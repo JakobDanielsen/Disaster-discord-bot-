@@ -21,8 +21,8 @@ let userWarns = {};
 
 
 // GAME VARIABLES
-let idList = [];
-let valueList = [];
+let idList = []
+let valueList = []
 
 let list = [];
 
@@ -426,31 +426,40 @@ async function handle_command(message, args) {
 
                 if (bankBalances) {
 
-                    console.log(bankBalances)
+                    // console.log(bankBalances)
                     
                     // idList.forEach(e => {
-                    //     if (idList.push(Object.keys(bankBalances) == e)) {
-                    //     console.log("No new");
+                    //     console.log(`Comparing ${Object.keys(bankBalances)} with ${e}`);
+                    //     if (Object.keys(bankBalances) == e) {
+                    //         console.log(`${Object.keys(bankBalances)} and ${e} are equal`);
                     //     } else {
-                    //     console.log( `idList.push(Object.keys(bankBalances) does not equal ${idList}`);
+                    //     console.log(`${Object.keys(bankBalances)} and ${e} are not equal`);
+                        
                     //     idList.push(Object.keys(bankBalances))
-                    //     valueList.push(Object.values(bankBalances))
-                    //     console.log(idList + " and " + valueList);
-                    //     message.channel.send(`id ${idList} has ${valueList}`)
-                    //     message.channel.send(`Heres the list: ${list}`)
+                    //         valueList.push(Object.values(bankBalances))
+                    //         console.log("idlist var: " + idList)
+                    //         console.log("valuelist var: " + valueList)
+                    //         console.log(Array.isArray(idList))
+                    //         console.log(idList.length)
+                    //     // console.log( `idList.push(Object.keys(bankBalances) does not equal ${idList}`);
+                    //     // idList.push(Object.keys(bankBalances))
+                    //     // valueList.push(Object.values(bankBalances))
+                    //     // console.log(idList + " and " + valueList);
+                    //     // message.channel.send(`id ${idList} has ${valueList}`)
+                    //     // message.channel.send(`Heres the list: ${list}`)
                     //     }
                     // });
 
-                            idList.push(Object.keys(bankBalances))
-                            valueList.push(Object.values(bankBalances))
-                            // console.log(idList + " and " + valueList);
-                            // for (let i = 0; i < idList.length; i++) {
-                            //     console.log(`<@${idList[i]}> has ${valueList[i]}`)
-                            //     message.channel.send(` <@${idList}> has ${valueList}`)
-                            // }
-                            idList.forEach(element => {
-                                message.channel.send(`<@${idList}> has x`);
-                            });
+                    //         // console.log(idList + " and " + valueList);
+                    //         // for (let i = 0; i < idList.length; i++) {
+                    //         //     console.log(`<@${idList[i]}> has ${valueList[i]}`)
+                    //         //     message.channel.send(` <@${idList}> has ${valueList}`)
+                    //         // }
+                    //         idList.forEach(element => {
+                                
+                    //             message.channel.send(`<@${element}> has x`);
+                    //             console.log(`<@${element}> has x`);
+                    //         });
                             
 
 
