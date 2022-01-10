@@ -449,7 +449,7 @@ async function handle_command(message, args) {
                             //     message.channel.send(` <@${idList}> has ${valueList}`)
                             // }
                             idList.forEach(element => {
-                                console.log(`<@${idList}> has x`);
+                                message.channel.send(`<@${idList}> has x`);
                             });
                             
 
