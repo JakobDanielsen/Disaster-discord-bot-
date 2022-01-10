@@ -66,38 +66,32 @@ client.on("messageCreate", async message => {
     if(userWarns[message.author.id] == null){
         userWarns[message.author.id] = 0;
     };
-    forbiddenWords = ["nigger", "nigga", "fuck", "faggot", "homse", "tranny", "jævla", "motherfucker", "faen", "neger", "hore", "whore", "simp", "slut", "n igger", "ni gger", "nig ger", "9ger", "negro", "slave", "n1gger", "n1gg3r", "n igga", "n i g g e r", "n i g g a", "n i g ga", "ni g g a", "n i gga","n i gg a", "fucking", "n 1 g g a", "ni gg er", "nig ger", "ni gger", "n ig ger"]
+    forbiddenWords = ["nigger", "NIGGERE", "Niggere", "niggers", "Nigguh", "tispe", "hurpe", "cunt", "Cunt", "merr", "tøyte", "Tispe", "Hurpe", "Merr", "Neger", "nigguh", "niggus", "Niggus", "Niggers", "Nigger", "Nigga", "nigga", "fuck", "faggot", "homse", "tranny", "jævla", "motherfucker", "faen", "neger", "hore", "whore", "simp", "slut", "n igger", "ni gger", "nig ger", "9ger", "negro", "slave", "n1gger", "n1gg3r", "n igga", "n i g g e r", "n i g g a", "n i g ga", "ni g g a", "n i gga","n i gg a", "fucking", "n 1 g g a", "ni gg er", "nig ger", "ni gger", "n ig ger", "Fuck", "Faen", "faen", "Bitch", "bitch"]
     for (let i = 0; i < forbiddenWords.length; i++) {
         try{
             if (message.content.includes(forbiddenWords[i])) {
-                message.delete();
-                message.channel.send("Watch your language! <@" + message.author.id +">");
+                await message.delete();
+                await message.channel.send("Watch your language! <@" + message.author.id +">");
                 userWarns[message.author.id] += 1;
-                message.channel.send(`you now have: ${userWarns[message.author.id]} warnings <@${message.author.id}>`);
+                await message.channel.send(`you now have: ${userWarns[message.author.id]} warnings <@${message.author.id}>`);
                 if(userWarns[message.author.id] >= 10){
                     try {
-                        if(!args[2]){
-                            message.channel.send("syntax: +ban [user] [reason]")
-                        }else{
                             async function ban(){
-                            const user = message.mentions.members.first();
-                            const reason = args[2]
-                            if (!reason) return message.channel.send('syntax: +ban [user] [reason]');
-                
+                            const user = message.member;
+                            const reason = "too many warnings!";
                             if (user) {
                                 user.ban({
                                 reason: reason,
                             }).then(() => {
-                                message.channel.send('banned!')
+                                message.channel.send('banned <@' + message.author.id +"> for unacceptable language multiple times");
                             })
                         } else {
                             message.channel.send('cant find the user!')
                         }
                             let server = message.guild.name;
-                            user.send(`you have been banned from: ***${server}*** for: ***${args[2]}***`)
+                            user.send(`you have been banned from: ***${server}*** for: ***${reason}***`)
                         };
-                            ban()
-                        };
+                            await ban()
                     } catch (err) {
                         message.channel.send('An error occured');
                         console.error(err);
@@ -169,7 +163,7 @@ async function handle_command(message, args) {
             bet();
         }else{
         checkIfSelectedCrypto();
-        if(args[1] > 0 && typeof(args[1] == "number")){
+        if(args[1] > 0 && !isNaN(parseFloat(args[1]))){
                 if (args[1] > bankBalances[message.author.id] || args[1] == null) {
                     message.channel.send("You must have the amount of money you bet");
                     return
@@ -276,26 +270,28 @@ async function handle_command(message, args) {
                 message.channel.send("since you had no cryptocurrency to get the value of, we gave you 10 Bitcoin, run the command again if you want to see its value!")
             }else{
             async function fetch(){
-            const fetch = require("node-fetch");
-            let data = await fetch(`http://api.coinlayer.com/api/live?access_key=223df91f83bcba306ce587bce6cc0fd8`).then(res =>
-            res.json()) .catch(console.error())
-            let userdata = data.rates[userselectedcrypto[message.author.id]];
-            let btcvalue = Math.round(bankBalances[message.author.id] * userdata );
-            let embed1 = new MessageEmbed()
-                .addFields(
-                    {name:`Your ${userselectedcrypto[message.author.id]} : `, value: `${thousandsSeparators(bankBalances[message.author.id])}`},
-                    {name: "USD equivalent: ", value: `${thousandsSeparators(btcvalue)} $`}
-                )
-                .setColor("#0099ff")
-                .setTimestamp()
-            message.channel.send({ embeds: [embed1]});
+                const fetch = (...args) => import('node-fetch').then({
+                    default: fetch});
+                    let data = await fetch(`http://api.coinlayer.com/api/live?access_key=223df91f83bcba306ce587bce6cc0fd8`)
+                        .then(res => res.json)
+                        .catch(console.error());
+                    let userdata = data.rates[userselectedcrypto[message.author.id]];
+                    let btcvalue = Math.round(bankBalances[message.author.id] * userdata );
+                    let embed1 = new MessageEmbed()
+                    .addFields(
+                        {name:`Your ${userselectedcrypto[message.author.id]} : `, value: `${thousandsSeparators(bankBalances[message.author.id])}`},
+                        {name: "USD equivalent: ", value: `${thousandsSeparators(btcvalue)} $`}
+                    )
+                    .setColor("#0099ff")
+                    .setTimestamp()
+                message.channel.send({ embeds: [embed1]});
+                };
+                fetch();
             };
-            fetch();
-        };
-        } catch (err) {
-            message.channel.send('An error occured');
-            console.error(err);
-        }
+            } catch (err) {
+                message.channel.send('An error occured');
+                console.error(err);
+            }
         break;
         case "flip":
             try{
@@ -335,12 +331,15 @@ async function handle_command(message, args) {
                 if(!args[2]){
                     message.channel.send("Syntax: +give [amount] [@player]");
                 } else{
-                    if(typeof(args[1]) == 'number' && userselectedcrypto[message.author.id] == userselectedcrypto[message.mentions.users.first().id]){
+                    
+                    if(!isNaN(parseFloat(args[1])) && userselectedcrypto[message.author.id] == userselectedcrypto[message.mentions.users.first().id && args[1] > 0]){
                         var usertag = message.mentions.members.first().id;
-                        if(!usertag == message.author.id){
-                            bankBalances[message.author.id] = bankBalances[message.author.id] - args[1];
-                            bankBalances[usertag] += args[1];
-                            message.channel.send(`you have successfully given ${args[1]} to ${args[2]}`);
+                        if(usertag != message.author.id){
+                            const amount = parseFloat(args[1]);
+                            if (!isNaN(amount))
+                            bankBalances[message.author.id] = bankBalances[message.author.id] - amount;
+                            bankBalances[usertag] += amount
+                            message.channel.send(`you have successfully given ${amount} to ${args[2]}`);
                         } else {
                             message.channel.send("you cant give yourself money")
                         }
