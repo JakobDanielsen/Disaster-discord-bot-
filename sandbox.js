@@ -276,10 +276,9 @@ async function handle_command(message, args) {
                 message.channel.send("since you had no cryptocurrency to get the value of, we gave you 10 Bitcoin, run the command again if you want to see its value!")
             }else{
             async function fetch(){
-                const fetch = (...args) => import('node-fetch').then({
-                    default: fetch});
+                    const fetch = require('node-fetch');
                     let data = await fetch(`http://api.coinlayer.com/api/live?access_key=223df91f83bcba306ce587bce6cc0fd8`)
-                        .then(res => res.json)
+                        .then(res => res.json())
                         .catch(console.error());
                     let userdata = data.rates[userselectedcrypto[message.author.id]];
                     let btcvalue = Math.round(bankBalances[message.author.id] * userdata );
