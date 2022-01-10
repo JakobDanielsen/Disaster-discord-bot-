@@ -15,8 +15,14 @@ let connection = null;
 // GAME VARIABLES
 let bankBalances = {};
 
+
 // AUTOMODERATE VARIABLES
 let userWarns = {};
+
+
+// GAME VARIABLES
+let idList = [];
+let valueList = [];
 
 let list = [];
 
@@ -419,17 +425,35 @@ async function handle_command(message, args) {
 
 
                 if (bankBalances) {
-                    if (Array.isArray(bankBalances)) {
-                        console.log("this is an array")
-                    } else {
-                        console.log("this is not an array")
-                    }
+
                     console.log(bankBalances)
-                    bankBalances.forEach(e => {
-                        list.push(JSON.stringify(e))
-                    });
-                    // message.channel.send(`Here's the list: ${JSON.stringify(bankBalances)}`)
-                    message.channel.send(list)
+                    
+                    // idList.forEach(e => {
+                    //     if (idList.push(Object.keys(bankBalances) == e)) {
+                    //     console.log("No new");
+                    //     } else {
+                    //     console.log( `idList.push(Object.keys(bankBalances) does not equal ${idList}`);
+                    //     idList.push(Object.keys(bankBalances))
+                    //     valueList.push(Object.values(bankBalances))
+                    //     console.log(idList + " and " + valueList);
+                    //     message.channel.send(`id ${idList} has ${valueList}`)
+                    //     message.channel.send(`Heres the list: ${list}`)
+                    //     }
+                    // });
+
+                            idList.push(Object.keys(bankBalances))
+                            valueList.push(Object.values(bankBalances))
+                            // console.log(idList + " and " + valueList);
+                            // for (let i = 0; i < idList.length; i++) {
+                            //     console.log(`<@${idList[i]}> has ${valueList[i]}`)
+                            //     message.channel.send(` <@${idList}> has ${valueList}`)
+                            // }
+                            idList.forEach(element => {
+                                console.log(`<@${idList}> has x`);
+                            });
+                            
+
+
 
                 } else {
                     message.channel.send("bankBalances is empty at the moment")
