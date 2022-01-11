@@ -460,7 +460,19 @@ async function handle_command(message, args) {
                     //             console.log(`<@${element}> has x`);
                     //         });
                             
-
+                    Object.keys(bankBalances).forEach(element => {
+                        idList.push(element);
+                    });
+                    valueList.push(Object.values(bankBalances))
+                    // console.log(idList + " and " + valueList);
+                    // for (let i = 0; i < idList.length; i++) {
+                    //     console.log(`<@${idList[i]}> has ${valueList[i]}`)
+                    //     message.channel.send(` <@${idList}> has ${valueList}`)
+                    // }
+                    for(i=0; i<idList.length;++i){
+                        message.channel.send(`<@${idList[i]}> has x`);
+                        console.log(idList);
+                    }
 
 
                 } else {
