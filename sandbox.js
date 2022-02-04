@@ -424,7 +424,7 @@ async function handle_command(message, args) {
 
 
                 if (bankBalances) {
-
+                    
                     // console.log(bankBalances)
                     
                     // idList.forEach(e => {
