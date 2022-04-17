@@ -72,7 +72,7 @@ client.on("messageCreate", async message => {
     if(userWarns[message.author.id] == null){
         userWarns[message.author.id] = 0;
     };
-    forbiddenWords = ["nigger", "NIGGERE", "Niggere", "niggers", "Nigguh", "tispe", "hurpe", "cunt", "Cunt", "merr", "tøyte", "Tispe", "Hurpe", "Merr", "Neger", "nigguh", "niggus", "Niggus", "Niggers", "Nigger", "Nigga", "nigga", "fuck", "faggot", "homse", "tranny", "jævla", "motherfucker", "faen", "neger", "hore", "whore", "simp", "slut", "n igger", "ni gger", "nig ger", "9ger", "negro", "slave", "n1gger", "n1gg3r", "n igga", "n i g g e r", "n i g g a", "n i g ga", "ni g g a", "n i gga","n i gg a", "fucking", "n 1 g g a", "ni gg er", "nig ger", "ni gger", "n ig ger", "Fuck", "Faen", "faen", "Bitch", "bitch"]
+    forbiddenWords = ["genshin impact"]
     for (let i = 0; i < forbiddenWords.length; i++) {
         try{
             if (message.content.includes(forbiddenWords[i])) {
